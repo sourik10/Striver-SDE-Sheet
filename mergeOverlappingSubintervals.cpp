@@ -1,27 +1,29 @@
 #include <bits/stdc++.h> 
-#include<vector>
 /*
 
     intervals[i][0] = start point of i'th interval
     intervals[i][1] = finish point of i'th interval
 
 */
+//time O(nlogn) + o(n)
+//(n logn) for sorting && (n) for traversing the row
 
 vector<vector<int>> mergeIntervals(vector<vector<int>> &intervals)
 {
-   vector<vector<int>>resInterval;
-   if(resInterval.size()==0) return resInterval;
-   sort(intervals.begin(),intervals.end());
-   vector<int>tmpInterval=intervals[0];
-   for(auto it:intervals){
-       if(it[0]<=tmpInterval[1]){
-           tmpInterval=max(it[1],tmpInterval[1]);
-       }
-       else{
-           resInterval.push_back(tmpInterval);
-           tmpInterval=it;
-       }
-   }
-   resInterval.push_back(tmpInterval);
-   return resInterval;
+    sort(intervals.begin(), intervals.end());
+    vector<vector<int>>merged;
+    for (int i=0;i<intervals.size();i++) {
+    if (merged.empty() || merged.back()[1] < intervals[i][0]) {
+      vector<int>v =
+      {
+        intervals[i][0],
+        intervals[i][1]
+      };
+      merged.push_back(v);
+    } else {
+      merged.back()[1] = max(merged.back()[1], intervals[i][1]);
+    }
+  }
+
+  return merged;
 }
