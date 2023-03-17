@@ -1,3 +1,21 @@
+//bruteforce
+//time O(n*2)
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
+vector<vector<int>> pairSum(vector<int> &arr, int target) {
+   vector<vector<int>>rs;
+   int n=arr.size();
+   for(int i=0;i<n;i++){
+      for(int j=i+1;j<n;j++){
+         if(arr[i]+arr[j]==target){
+           rs.push_back({min(arr[i], arr[j]), max(arr[i], arr[j])});
+         }
+      }
+   }
+   sort(rs.begin(),rs.end());
+   return rs;
+}
+
 //using hashmap concept
 //time O(nlogn) , space O(n)
 #include <bits/stdc++.h> 
